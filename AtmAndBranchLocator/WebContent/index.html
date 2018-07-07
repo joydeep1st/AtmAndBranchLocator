@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en">
+<!--<![endif]-->
+<head>
+<meta charset="utf-8" />
+
+<!-- Set the viewport width to device width for mobile -->
+<meta name="viewport" content="width=device-width" />
+
+<title>Welcome to ATM and Branch Locator Site</title>
+
+<!-- Included CSS Files -->
+<link rel="stylesheet" href="stylesheets/foundation.css">
+<link rel="stylesheet" href="stylesheets/app.css">
+<link rel="stylesheet" href="stylesheets/w3.css">
+<!-- <link rel="stylesheet" href="stylesheets/dropdown.css"> -->
+
+<!--[if lt IE 9]>
+    <link rel="stylesheet" href="stylesheets/ie.css">
+  <![endif]-->
+
+<script src="javascripts/modernizr.foundation.js"></script>
+
+<!-- IE Fix for HTML5 Tags -->
+<!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+<style>
+.dropbtn {
+	background-color: #99A3A4;
+	color: white;
+	padding: 16px;
+	font-size: 16px;
+	border: none;
+	cursor: pointer;
+}
+
+.dropdown {
+	position: relative;
+	display: inline-block;
+}
+
+.dropdown-content {
+	display: none;
+	position: absolute;
+	background-color: #f9f9f9;
+	min-width: 160px;
+	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+	z-index: 1;
+}
+
+.dropdown-content a {
+	color: black;
+	padding: 12px 16px;
+	text-decoration: none;
+	display: block;
+}
+
+.dropdown-content a:hover {
+	background-color: #2ba6cb;
+}
+
+.dropdown:hover .dropdown-content {
+	display: block;
+}
+
+.dropdown:hover .dropbtn {
+	background-color: #AEB6BF;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	font: 16px Arial;
+}
+
+.autocomplete {
+	/*the container must be positioned relative:*/
+	position: relative;
+	display: inline-block;
+}
+
+input {
+	border: 1px solid transparent;
+	background-color: #f1f1f1;
+	padding: 10px;
+	font-size: 16px;
+}
+
+input[type=text] {
+	background-color: #f1f1f1;
+	width: 100%;
+}
+
+input[type=submit] {
+	background-color: DodgerBlue;
+	color: #fff;
+	cursor: pointer;
+}
+
+.autocomplete-items {
+	position: absolute;
+	border: 1px solid #d4d4d4;
+	border-bottom: none;
+	border-top: none;
+	z-index: 99;
+	/*position the autocomplete items to be the same width as the container:*/
+	top: 100%;
+	left: 0;
+	right: 0;
+}
+
+.autocomplete-items div {
+	padding: 10px;
+	cursor: pointer;
+	background-color: #fff;
+	border-bottom: 1px solid #d4d4d4;
+}
+
+.autocomplete-items div:hover {
+	/*when hovering an item:*/
+	background-color: #e9e9e9;
+}
+
+.autocomplete-active {
+	/*when navigating through the items using the arrow keys:*/
+	background-color: DodgerBlue !important;
+	color: #ffffff;
+}
+
+.doPadding {
+	padding-bottom: 2.5 em;
+}
+</style>
+
+</head>
+
+<body>
+
+	<div class="row">
+		<div class="twelve columns">
+			<img src="images/1wd-dark.png" align="left" />
+			<p align="center">
+			<h2>Welcome to ATM & Branch Locator</h2>
+			</p>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="twelve columns">
+			<ul class="nav-bar">
+				<li class="active"><a href="#">Home</a></li>
+				<li><a href="#">Profile</a></li>
+				<li><a href="#">About App</a></li>
+			</ul>
+
+		</div>
+	</div>
+
+	<!-- don't mind this script, I just added them for fun! -->
+	<!--<script charset="ISO-8859-1" src="http://fast.wistia.com/static/popover-v1.js"></script> -->
+
+	<div class="row">
+		<div class="twelve columns">
+			<div class="row">
+				<div class="eight columns">
+					<div class="dropdown">
+						<button class="dropbtn">Brand Name</button>
+						<div class="dropdown-content">
+							<a href="#">Lloyds Bank</a> <a href="#">Barclays</a>
+						</div>
+					</div>
+					<div class="dropdown">
+						<button class="dropbtn">Branch Name</button>
+						<div class="dropdown-content">
+							<a href="#">CREDITON</a> <a href="#">ST SAMPSONS</a> <a href="#">SOUTH
+								ELMSALL</a>
+						</div>
+					</div>
+					<div class="dropdown">
+						<button class="dropbtn">Service And Facility</button>
+						<div class="dropdown-content">
+							<a href="#">ATMAtBranch</a> <a href="#">SafeCustody</a>
+						</div>
+					</div>
+
+					<div class="dropdown">
+						<div class="autocomplete" style="width: 120px;">
+							<input id="myInput" type="text" name="myInput"
+								placeholder="ZipCode">
+						</div>
+						<input type="submit">
+						<script type="text/javascript">
+							function autocomplete(inp, arr) {
+								//alert("hivdvvsdv" + inp);
+								/*the autocomplete function takes two arguments,
+								the text field element and an array of possible autocompleted values:*/
+								var currentFocus;
+								/*execute a function when someone writes in the text field:*/
+								inp
+										.addEventListener(
+												"input",
+												function(e) {
+
+													var a, b, i, val = this.value;
+													/*close any already open lists of autocompleted values*/
+													closeAllLists();
+													if (!val) {
+														return false;
+													}
+													currentFocus = -1;
+													/*create a DIV element that will contain the items (values):*/
+													a = document
+															.createElement("DIV");
+													a
+															.setAttribute(
+																	"id",
+																	this.id
+																			+ "autocomplete-list");
+													a
+															.setAttribute(
+																	"class",
+																	"autocomplete-items");
+													/*append the DIV element as a child of the autocomplete container:*/
+													this.parentNode
+															.appendChild(a);
+													/*for each item in the array...*/
+													for (i = 0; i < arr.length; i++) {
+														/*check if the item starts with the same letters as the text field value:*/
+														if (arr[i].substr(0,
+																val.length)
+																.toUpperCase() == val
+																.toUpperCase()) {
+															/*create a DIV element for each matching element:*/
+															b = document
+																	.createElement("DIV");
+															/*make the matching letters bold:*/
+															b.innerHTML = "<strong>"
+																	+ arr[i]
+																			.substr(
+																					0,
+																					val.length)
+																	+ "</strong>";
+															b.innerHTML += arr[i]
+																	.substr(val.length);
+															/*insert a input field that will hold the current array item's value:*/
+															b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+															/*execute a function when someone clicks on the item value (DIV element):*/
+															b
+																	.addEventListener(
+																			"click",
+																			function(
+																					e) {
+																				/*insert the value for the autocomplete text field:*/
+																				inp.value = this
+																						.getElementsByTagName("input")[0].value;
+																				/*close the list of autocompleted values,
+																				(or any other open lists of autocompleted values:*/
+																				closeAllLists();
+																			});
+															a.appendChild(b);
+														}
+													}
+												});
+								/*execute a function presses a key on the keyboard:*/
+								inp.addEventListener("keydown", function(e) {
+									var x = document.getElementById(this.id
+											+ "autocomplete-list");
+									if (x)
+										x = x.getElementsByTagName("div");
+									if (e.keyCode == 40) {
+										/*If the arrow DOWN key is pressed,
+										increase the currentFocus variable:*/
+										currentFocus++;
+										/*and and make the current item more visible:*/
+										addActive(x);
+									} else if (e.keyCode == 38) { //up
+										/*If the arrow UP key is pressed,
+										decrease the currentFocus variable:*/
+										currentFocus--;
+										/*and and make the current item more visible:*/
+										addActive(x);
+									} else if (e.keyCode == 13) {
+										/*If the ENTER key is pressed, prevent the form from being submitted,*/
+										e.preventDefault();
+										if (currentFocus > -1) {
+											/*and simulate a click on the "active" item:*/
+											if (x)
+												x[currentFocus].click();
+										}
+									}
+								});
+								function addActive(x) {
+									/*a function to classify an item as "active":*/
+									if (!x)
+										return false;
+									/*start by removing the "active" class on all items:*/
+									removeActive(x);
+									if (currentFocus >= x.length)
+										currentFocus = 0;
+									if (currentFocus < 0)
+										currentFocus = (x.length - 1);
+									/*add class "autocomplete-active":*/
+									x[currentFocus].classList
+											.add("autocomplete-active");
+								}
+								function removeActive(x) {
+									/*a function to remove the "active" class from all autocomplete items:*/
+									for (var i = 0; i < x.length; i++) {
+										x[i].classList
+												.remove("autocomplete-active");
+									}
+								}
+								function closeAllLists(elmnt) {
+									/*close all autocomplete lists in the document,
+									except the one passed as an argument:*/
+									var x = document
+											.getElementsByClassName("autocomplete-items");
+									for (var i = 0; i < x.length; i++) {
+										if (elmnt != x[i] && elmnt != inp) {
+											x[i].parentNode.removeChild(x[i]);
+										}
+									}
+								}
+								/*execute a function when someone clicks in the document:*/
+								document.addEventListener("click", function(e) {
+									closeAllLists(e.target);
+								});
+							}
+
+							/*An array containing all the country names in the world:*/
+							var countries = [ "Afghanistan", "Albania",
+									"Algeria", "Andorra", "Angola", "Anguilla",
+									"Antigua & Barbuda", "Argentina",
+									"Armenia", "Aruba", "Australia", "Austria",
+									"Azerbaijan", "Bahamas", "Bahrain",
+									"Bangladesh", "Barbados", "Belarus",
+									"Belgium", "Belize", "Benin", "Bermuda",
+									"Bhutan", "Bolivia",
+									"Bosnia & Herzegovina", "Botswana",
+									"Brazil", "British Virgin Islands",
+									"Brunei", "Bulgaria", "Burkina Faso",
+									"Burundi", "Cambodia", "Cameroon",
+									"Canada", "Cape Verde", "Cayman Islands",
+									"Central Arfrican Republic", "Chad",
+									"Chile", "China", "Colombia", "Congo",
+									"Cook Islands", "Costa Rica",
+									"Cote D Ivoire", "Croatia", "Cuba",
+									"Curacao", "Cyprus", "Czech Republic",
+									"Denmark", "Djibouti", "Dominica",
+									"Dominican Republic", "Ecuador", "Egypt",
+									"El Salvador", "Equatorial Guinea",
+									"Eritrea", "Estonia", "Ethiopia",
+									"Falkland Islands", "Faroe Islands",
+									"Fiji", "Finland", "France",
+									"French Polynesia", "French West Indies",
+									"Gabon", "Gambia", "Georgia", "Germany",
+									"Ghana", "Gibraltar", "Greece",
+									"Greenland", "Grenada", "Guam",
+									"Guatemala", "Guernsey", "Guinea",
+									"Guinea Bissau", "Guyana", "Haiti",
+									"Honduras", "Hong Kong", "Hungary",
+									"Iceland", "India", "Indonesia", "Iran",
+									"Iraq", "Ireland", "Isle of Man", "Israel",
+									"Italy", "Jamaica", "Japan", "Jersey",
+									"Jordan", "Kazakhstan", "Kenya",
+									"Kiribati", "Kosovo", "Kuwait",
+									"Kyrgyzstan", "Laos", "Latvia", "Lebanon",
+									"Lesotho", "Liberia", "Libya",
+									"Liechtenstein", "Lithuania", "Luxembourg",
+									"Macau", "Macedonia", "Madagascar",
+									"Malawi", "Malaysia", "Maldives", "Mali",
+									"Malta", "Marshall Islands", "Mauritania",
+									"Mauritius", "Mexico", "Micronesia",
+									"Moldova", "Monaco", "Mongolia",
+									"Montenegro", "Montserrat", "Morocco",
+									"Mozambique", "Myanmar", "Namibia",
+									"Nauro", "Nepal", "Netherlands",
+									"Netherlands Antilles", "New Caledonia",
+									"New Zealand", "Nicaragua", "Niger",
+									"Nigeria", "North Korea", "Norway", "Oman",
+									"Pakistan", "Palau", "Palestine", "Panama",
+									"Papua New Guinea", "Paraguay", "Peru",
+									"Philippines", "Poland", "Portugal",
+									"Puerto Rico", "Qatar", "Reunion",
+									"Romania", "Russia", "Rwanda",
+									"Saint Pierre & Miquelon", "Samoa",
+									"San Marino", "Sao Tome and Principe",
+									"Saudi Arabia", "Senegal", "Serbia",
+									"Seychelles", "Sierra Leone", "Singapore",
+									"Slovakia", "Slovenia", "Solomon Islands",
+									"Somalia", "South Africa", "South Korea",
+									"South Sudan", "Spain", "Sri Lanka",
+									"St Kitts & Nevis", "St Lucia",
+									"St Vincent", "Sudan", "Suriname",
+									"Swaziland", "Sweden", "Switzerland",
+									"Syria", "Taiwan", "Tajikistan",
+									"Tanzania", "Thailand", "Timor L'Este",
+									"Togo", "Tonga", "Trinidad & Tobago",
+									"Tunisia", "Turkey", "Turkmenistan",
+									"Turks & Caicos", "Tuvalu", "Uganda",
+									"Ukraine", "United Arab Emirates",
+									"United Kingdom",
+									"United States of America", "Uruguay",
+									"Uzbekistan", "Vanuatu", "Vatican City",
+									"Venezuela", "Vietnam",
+									"Virgin Islands (US)", "Yemen", "Zambia",
+									"Zimbabwe" ];
+
+							/*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
+							autocomplete(document.getElementById("myInput"),
+									countries);
+						</script>
+					</div>
+
+
+
+					<div class="doPadding"></div>
+
+
+					<div class="w3-panel w3-lime w3-card-4">
+						<p>
+							"AddressLine": "LLOYDS BRANCH 30 HIGH STREET", "TownName":
+							"CREDITON",<br /> "CountrySubDivision": "DEVON" <br />
+							"Country": "GB",<<br /> "PostCode": "EX17 3AH"
+						</p>
+					</div>
+
+					<div class="w3-panel w3-light-green w3-card-4">
+						<p>
+							"AddressLine": "LLOYDS BRANCH 30 HIGH STREET", "TownName":
+							"CREDITON",<br /> "CountrySubDivision": "DEVON" <br />
+							"Country": "GB",<<br /> "PostCode": "EX17 3AH"
+						</p>
+					</div>
+				</div>
+
+				<div class="four columns">
+					<div id="googleMap" style="width: 100%; height: 300px;"></div>
+					<script>
+						function myMap() {
+							var mapProp = {
+								center : new google.maps.LatLng(50.790428,
+										-3.659145),
+								zoom : 5,
+							};
+							var map = new google.maps.Map(document
+									.getElementById("googleMap"), mapProp);
+						}
+					</script>
+					
+					<!--  AIzaSyBu-916DdpKAjTmJNIgngS6HL_kDIKU0aU -->
+
+					<script
+						src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCDZM6J_wi4l_Nn39S80fI9dXYNZKAS7s&callback=myMap"></script>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="twelve columns">
+			<hr />
+			<p class="pfooter" align="center">ATM and Branch Locator Web
+				Application - Hosted in AWS Server</p>
+		</div>
+	</div>
+</body>
